@@ -76,13 +76,6 @@ if gloire%3==0 and gloire != 0:
 #         couleur=st.color_picker("Couleur d'avion", value="#F50505")
 #         formulaire_avion=st.form_submit_button("Créez votre avion")
 
-# ça ne marche pas parce que quand tu cliques sur un autre bouton ça rerun et ça donc ça perd la mémoire de l'autre boutton
-# if formulaire_perso and not formulaire_avion:
-#     st.write("Maintenant, créez votre avion !")
-# elif formulaire_perso and formulaire_avion:
-#     st.write(f"Vous êtes {prenom} {nom}, pilote originaire de {nationalite} et agé de {age} ans.")
-# else:
-#     st.write("Créez votre personnage et votre avion!")
 
 
 m=folium.Map(location=[44.138808, 13.806688], zoom_start=7)
