@@ -69,14 +69,6 @@ if formulaire_perso:
 if gloire%3==0 and gloire != 0:
     st.success("Tu as une récompense !")
 
-# with st.expander("Avion"):
-#     with st.form("Avion"):
-#         modele=st.selectbox("Modèle",["Avion 1","Avion 2","Avion 3"],placeholder="Votre avion")
-#         nom_avion=st.text_input("Nom", placeholder="Le nom de votre avion")
-#         couleur=st.color_picker("Couleur d'avion", value="#F50505")
-#         formulaire_avion=st.form_submit_button("Créez votre avion")
-
-
 
 m=folium.Map(location=[44.138808, 13.806688], zoom_start=7)
 st_data=st_folium(m,width=725,height=550)
