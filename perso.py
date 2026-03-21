@@ -27,6 +27,14 @@ if "gloire" not in st.session_state:
     st.session_state.gloire=''
 if "surnom" not in st.session_state:
     st.session_state.surnom=''
+if "signe_distinct" not in st.session_state:
+    st.session_state.signe_distinct=''
+if "adj1" not in st.session_state:
+    st.session_state.adj1=''
+if "adj2" not in st.session_state:
+    st.session_state.adj2=''
+if "adj3" not in st.session_state:
+    st.session_state.adj3=''
 
 
 def maj_perso():
@@ -36,7 +44,11 @@ def maj_perso():
     st.session_state.age=st.session_state.newage
     st.session_state.nationalite=st.session_state.newnationalite
     st.session_state.surnom=st.session_state.newsurnom
-
+    st.session_state.signe_distinct=st.session_state.newsigne_distinct
+    st.session_state.adj1=st.session_state.newadj1
+    st.session_state.adj2=st.session_state.newadj2
+    st.session_state.adj3=st.session_state.newadj3
+    
 def maj_gloire():
     st.session_state.gloire=st.session_state.newgloire
 
@@ -58,6 +70,11 @@ with st.expander("Aviateur"):
             nationalite=st.selectbox("Pays d'origine",["Angleterre","France", "Italie", "Allemagne", "Japon","Etats-Unis"],placeholder="Votre pays de naissance",key='newnationalite')
         with st.container(horizontal=True,horizontal_alignment="center"):
             surnom=st.text_input("Surnom",placeholder="Votre surnom",key="newsurnom")
+        with st.container(horizontal=True):
+            adj1=st.text_input("Adjectif Positif 1",placeholder="Un adjectif positif",key='newadj1')
+            adj2=st.text_input("Adjectif Positif 2",placeholder="Un autre adjectif positif",key='newadj2')
+            adj3=st.text_input("Adjectif Négatif",placeholder="Un adjectif négatif",key='newadj3')
+        signe_distinct=st.text_area("Signe distinctif", placeholder="Votre signe distinctif",key="newsigne_distinct")
         formulaire_perso=st.form_submit_button("Créez votre personnage", on_click=maj_perso)
 
 votre_titre=titre['Titre'].loc[0]
