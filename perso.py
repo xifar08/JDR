@@ -9,7 +9,7 @@ st.title("Fiche d'aviateur")
 st.header("Identité")
 st.subheader("Rentrez les informations demandées")
 
-st.write(st.session_state)
+# st.write(st.session_state)
 
 titre=pd.DataFrame({'Titre':["Pas de titre","Espoir","Etoile Montante","As","As des As","Légende","Mythe"]})
 
