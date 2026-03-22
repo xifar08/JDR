@@ -11,7 +11,6 @@ st.subheader("Rentrez les informations demandées")
 
 # st.write(st.session_state)
 
-titre=pd.DataFrame({'Titre':["Pas de titre","Espoir","Etoile Montante","As","As des As","Légende","Mythe"]})
 
 if "genre" not in st.session_state:
     st.session_state.genre=''
@@ -23,8 +22,6 @@ if "age" not in st.session_state:
     st.session_state.age=''
 if "nationalite" not in st.session_state:
     st.session_state.nationalite=''
-if "gloire" not in st.session_state:
-    st.session_state.gloire=''
 if "surnom" not in st.session_state:
     st.session_state.surnom=''
 if "signe_distinct" not in st.session_state:
@@ -49,15 +46,12 @@ def maj_perso():
     st.session_state.adj2=st.session_state.newadj2
     st.session_state.adj3=st.session_state.newadj3
     
-def maj_gloire():
-    st.session_state.gloire=st.session_state.newgloire
+
 
 with st.sidebar:
     st.write("Bienvenue dans ce sidebar")
 
-with st.form("Gloire"):
-    gloire=st.slider("Gloire",0,36,key="newgloire")
-    st.form_submit_button("Maj gloire", on_click=maj_gloire)
+
     
 with st.expander("Aviateur"):
     with st.form("Aviateur"):
@@ -77,15 +71,9 @@ with st.expander("Aviateur"):
         signe_distinct=st.text_area("Signe distinctif", placeholder="Votre signe distinctif",key="newsigne_distinct")
         formulaire_perso=st.form_submit_button("Créez votre personnage", on_click=maj_perso)
 
-votre_titre=titre['Titre'].loc[0]
-if gloire%6==0:
-            votre_titre=titre['Titre'].loc[gloire/6]
-st.write("Votre titre est : "+votre_titre)
+
 if formulaire_perso:
     st.write(f"Vous êtes {prenom} {nom}, pilote originaire de {nationalite} et agé de {age} ans.")
-if gloire%3==0 and gloire != 0:
-    st.success("Tu as une récompense !")
-
 
 m=folium.Map(location=[44.138808, 13.806688], zoom_start=7)
 st_data=st_folium(m,width=725,height=550)
