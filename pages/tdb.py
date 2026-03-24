@@ -4,6 +4,9 @@ import pandas as pd
 # st.write(st.session_state)
 
 set_init={'Calme','Courage','Intuition','Casse-Cou','Journal intime','Base secrète'}
+titre=pd.DataFrame({'Titre':["Pas de titre","Espoir","Etoile Montante","As","As des As","Légende","Mythe"]})
+
+
 
 if "set_got" not in st.session_state:
     st.session_state.set_got=set()
@@ -13,7 +16,8 @@ if "nostalgie" not in st.session_state:
     st.session_state.nostalgie=''
 if "jauge" not in st.session_state:
     st.session_state.jauge=''
-
+if "gloire" not in st.session_state:
+    st.session_state.gloire=''
 
 def maj_etat():
     st.session_state.nostalgie=st.session_state.newnostalgie
@@ -36,6 +40,9 @@ def reinit_avantages():
 def reinit_nostjauge():
     st.session_state.nostalgie=0
     st.session_state.jauge=4
+
+def maj_gloire():
+    st.session_state.gloire=st.session_state.newgloire
 
 st.title('Tableau de bord')
 st.subheader(f"Ta nostalgie est de {st.session_state.nostalgie} et ta jauge est à {st.session_state.jauge}.")
@@ -61,7 +68,10 @@ with st.expander('Nostalgie et jauge'):
         st.form_submit_button("Maj état",on_click=maj_etat)
     st.button("Réinitialiser la nostalgie et la jauge",on_click=reinit_nostjauge)
 
-
+with st.expander('Gloire'):
+    with st.form("Gloire"):
+        gloire=st.slider("Gloire",0,36,key="newgloire")
+        st.form_submit_button("Maj gloire", on_click=maj_gloire)
 
 with st.expander('Avantages du pilote'):
     with st.form('Avantages pilote, choix'):
@@ -77,6 +87,12 @@ with st.expander('Avantages du pilote'):
         st.form_submit_button("Maj",on_click=maj_set_recharge)  
     st.button("Réinitialiser les avantages",on_click=reinit_avantages)
 
+votre_titre=titre['Titre'].loc[0]
+if gloire%6==0:
+            votre_titre=titre['Titre'].loc[gloire/6]
+st.write("Votre titre est : "+votre_titre)
 
+if gloire%3==0 and gloire != 0:
+    st.success("Tu as une récompense !")
 
 
