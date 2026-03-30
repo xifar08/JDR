@@ -13,11 +13,13 @@ if "set_got" not in st.session_state:
 if "set_used" not in st.session_state:
     st.session_state.set_used=set()
 if "nostalgie" not in st.session_state:
-    st.session_state.nostalgie=''
+    st.session_state.nostalgie=0
 if "jauge" not in st.session_state:
-    st.session_state.jauge=''
+    st.session_state.jauge=4
 if "gloire" not in st.session_state:
-    st.session_state.gloire=''
+    st.session_state.gloire=0
+if "titre" not in st.session_state:
+    st.session_state.titre=titre['Titre'].loc[0]
 
 def maj_etat():
     st.session_state.nostalgie=st.session_state.newnostalgie
@@ -44,12 +46,28 @@ def reinit_nostjauge():
 def maj_gloire():
     st.session_state.gloire=st.session_state.newgloire
 
+def maj_titre(gloire):
+    st.session_state.titre=titre['Titre'].loc[gloire/6]
+
+
 st.title('Tableau de bord')
+
 st.subheader(f"Ta nostalgie est de {st.session_state.nostalgie} et ta jauge est à {st.session_state.jauge}.")
 if st.session_state.nostalgie==10 or st.session_state.jauge==0:
     st.error("Il est temps de raccrocher...")
 else :
     st.success("Tu peux voler tranquille.")
+
+
+
+if st.session_state.gloire%6==0:
+            maj_titre(st.session_state.gloire)
+            
+st.subheader(f"Ta gloire est de {st.session_state.gloire}. Ton titre est {st.session_state.titre}")
+
+if st.session_state.gloire%3==0 and st.session_state.gloire != 0:
+    st.success("Tu as une récompense !")
+
 
 avantages = pd.DataFrame({
     'Avantages à acquérir' : pd.Series(list(set_init.difference(st.session_state.set_got))),
@@ -87,12 +105,6 @@ with st.expander('Avantages du pilote'):
         st.form_submit_button("Maj",on_click=maj_set_recharge)  
     st.button("Réinitialiser les avantages",on_click=reinit_avantages)
 
-votre_titre=titre['Titre'].loc[0]
-if gloire%6==0:
-            votre_titre=titre['Titre'].loc[gloire/6]
-st.write("Votre titre est : "+votre_titre)
 
-if gloire%3==0 and gloire != 0:
-    st.success("Tu as une récompense !")
 
 
